@@ -20,12 +20,7 @@ class PostController extends Controller
         return new PostResource(true, 'List Data Posts', $posts);
     }
     
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return void
-     */
+
     public function store(Request $request)
     {
         //define validation rules
@@ -55,25 +50,13 @@ class PostController extends Controller
         return new PostResource(true, 'Data Post Berhasil Ditambahkan!', $post);
     }
         
-    /**
-     * show
-     *
-     * @param  mixed $post
-     * @return void
-     */
+    
     public function show(Post $post)
     {
         //return single post as a resource
         return new PostResource(true, 'Data Post Ditemukan!', $post);
     }
     
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $post
-     * @return void
-     */
     public function update(Request $request, Post $post)
     {
         //define validation rules
@@ -118,12 +101,6 @@ class PostController extends Controller
         return new PostResource(true, 'Data Post Berhasil Diubah!', $post);
     }
     
-    /**
-     * destroy
-     *
-     * @param  mixed $post
-     * @return void
-     */
     public function destroy(Post $post)
     {
         //delete image
@@ -135,4 +112,20 @@ class PostController extends Controller
         //return response
         return new PostResource(true, 'Data Post Berhasil Dihapus!', null);
     }
+
+    // public function displayImage($filename)
+    // {
+    //     $path = storage_public('storage/app/public/posts' . $filename);
+
+    //     if (!File::exists($path)) {
+    //         abort(404);
+    //     }
+
+    //     $file = File::get($path);
+    //     $type = File::mimeType($path);
+    //     $response = Response::make($file, 200);
+    //     $response->header("Content-Type", $type);
+
+    //     return $response;
+    // }
 }
