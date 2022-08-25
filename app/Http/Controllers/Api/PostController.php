@@ -19,7 +19,6 @@ class PostController extends Controller
         //return collection of posts as a resource
         return new PostResource(true, 'List Data Posts', $posts);
     }
-    
 
     public function store(Request $request)
     {
@@ -35,13 +34,27 @@ class PostController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        // //upload image
+        // $image = $request->file('image');
+        // $image->storeAs('public/posts', $image->hashName());
+
+        // //create post
+        // $post = Post::create([
+        //     'image'     => $image->hashName(),
+        //     'title'     => $request->title,
+        //     'content'   => $request->content,
+        // ]);
+
         //upload image
         $image = $request->file('image');
+        //menyimpan gambar ke dalam folder
         $image->storeAs('public/posts', $image->hashName());
+        //membuat url untuk menampilkan gambar
+        $url = asset('/storage/posts/'.$image->hashName());
 
-        //create post
+        //menyimpan gambar ke dalam database
         $post = Post::create([
-            'image'     => $image->hashName(),
+            'image'     => $url,
             'title'     => $request->title,
             'content'   => $request->content,
         ]);
